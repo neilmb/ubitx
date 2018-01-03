@@ -256,8 +256,6 @@ void setTXFilters(unsigned long freq){
  */
 
 void setFrequency(unsigned long f){
-  uint64_t osc_f;
-
   setTXFilters(f);
 
   if (isUSB){
@@ -279,7 +277,6 @@ void setFrequency(unsigned long f){
  */
 
 void startTx(byte txMode){
-  unsigned long tx_freq = 0;
   digitalWrite(TX_RX, 1);
   inTx = 1;
 
@@ -364,8 +361,6 @@ void checkPTT(){
 }
 
 void checkButton(){
-  int i, t1, t2, knob, new_knob;
-
   //only if the button is pressed
   if (!btnDown())
     return;
@@ -432,8 +427,6 @@ void doTuning(){
  * RIT only steps back and forth by 100 Hz at a time
  */
 void doRIT(){
-  unsigned long newFreq;
-
   int knob = enc_read();
   unsigned long old_freq = frequency;
 

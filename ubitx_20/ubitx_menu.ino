@@ -13,13 +13,8 @@
 
 
 
-int menuBand(int btn){
+void  menuBand(int btn){
   int knob = 0;
-  int band;
-  unsigned long offset;
-
- // band = frequency/1000000l;
- // offset = frequency % 1000000l;
 
   if (!btn){
    printLine2("Band Select?");
@@ -196,7 +191,7 @@ void menuExit(int btn){
   }
 }
 
-int menuCWSpeed(int btn){
+void menuCWSpeed(int btn){
     int knob = 0;
     int wpm;
 
@@ -265,10 +260,8 @@ int menuCWSpeed(int btn){
 extern int32_t calibration;
 extern uint32_t si5351bx_vcoa;
 
-int factoryCalibration(int btn){
+void factoryCalibration(int btn){
   int knob = 0;
-  int32_t prev_calibration;
-
 
   //keep clear of any previous button press
   while (btnDown())
@@ -277,10 +270,9 @@ int factoryCalibration(int btn){
 
   if (!btn){
     printLine2("Set Calibration?");
-    return 0;
+    return;
   }
 
-  prev_calibration = calibration;
   calibration = 0;
 
   isUSB = true;
@@ -335,13 +327,13 @@ int factoryCalibration(int btn){
   delay(100);
 }
 
-int menuSetupCalibration(int btn){
+void menuSetupCalibration(int btn){
   int knob = 0;
   int32_t prev_calibration;
 
   if (!btn){
     printLine2("Set Calibration?");
-    return 0;
+    return;
   }
 
   printLine1("Set to Zero-beat,");
@@ -484,7 +476,7 @@ void menuSetupCwTone(int btn){
     delay(1000);
     tone(CW_TONE, sideTone);
 
-    //disable all clock 1 and clock 2 
+    //disable all clock 1 and clock 2
     while (digitalRead(PTT) == HIGH && !btnDown())
     {
       knob = enc_read();

@@ -54,7 +54,7 @@ void initMeter(){
  * This displays a meter from 0 to 100, -1 displays nothing
  */
 void drawMeter(int8_t needle){
-  int16_t best, i, s;
+  int16_t i, s;
 
   if (needle < 0)
     return;
@@ -75,7 +75,7 @@ void drawMeter(int8_t needle){
 }
 
 // The generic routine to display one line on the LCD
-void printLine(char linenmbr, char *c) {
+void printLine(uint8_t linenmbr, char *c) {
   if (strcmp(c, printBuff[linenmbr])) {     // only refresh the display when there was a change
     lcd.setCursor(0, linenmbr);             // place the cursor at the beginning of the selected line
     lcd.print(c);
@@ -91,9 +91,17 @@ void printLine(char linenmbr, char *c) {
 void printLine1(char *c){
   printLine(1,c);
 }
-//  short cut to print to the first line
+//  short cut to print a string literal to the first line
+void printLine1(const char c[]){
+  printLine(1, (char *) c);
+}
+//  short cut to print to the second line
 void printLine2(char *c){
   printLine(0,c);
+}
+//  short cut to print a string literal to the second line
+void printLine2(const char c[]){
+  printLine(0, (char *) c);
 }
 
 // this builds up the top line of the display with frequency and mode
@@ -196,7 +204,7 @@ int enc_read(void) {
   byte newState;
   int enc_speed = 0;
 
-  long stop_by = millis() + 50;
+  unsigned long stop_by = millis() + 50;
 
   while (millis() < stop_by) { // check if the previous state was stable
     newState = enc_state(); // Get current state
