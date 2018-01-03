@@ -1,5 +1,7 @@
 
-uBITX firmware, written for the Raduino/Arduino control of uBITX tranceivers
+# uBITX firmware
+
+Written for the Raduino/Arduino control of uBITX tranceivers
 
 Copyright (C) 2017,  Ashhar Farhan
 
@@ -15,3 +17,10 @@ Copyright (C) 2017,  Ashhar Farhan
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+## Contributing
+
+To make community contributions more manageable, we use automated
+testing to ensure that the code is consistently formatted. To format
+the code automatically in accordance with the style guidelines, install
+the program `clang-format` and run `clang-format -i ubitx_20/*`.

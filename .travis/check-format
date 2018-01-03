@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Check the source code for correct format and return the number of
+# files with errors if it is not all correct.
+
+RESULT=0
+for file in $(ls ubitx_20/*); do
+  clang-format -style=file $file | diff $file -
+  RESULT=$(($RESULT+$?))
+done
+
+exit $RESULT
