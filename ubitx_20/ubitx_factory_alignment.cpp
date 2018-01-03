@@ -2,6 +2,14 @@
 /**
  * This procedure is only for those who have a signal generator/transceiver tuned to exactly 7.150 and a dummy load 
  */
+#ifndef PROTOFLAG
+  #include "Prototypes.h"
+#endif
+
+extern int32_t calibration;
+extern unsigned long usbCarrier;
+extern char isUSB;
+
 
 void btnWaitForClick(){
   while(!btnDown())
@@ -16,28 +24,28 @@ void factory_alignment(){
   factoryCalibration(1);
 
   if (calibration == 0){
-    printLine2("Setup Aborted");
+    printLine2( (char *) "Setup Aborted");
     return;
   }
 
   //move it away to 7.160 for an LSB signal
-  setFrequency(7160000l);
+  setFrequency(7160000L);
   updateDisplay();
-  printLine2("#2 BFO");
+  printLine2( (char *) "#2 BFO");
   delay(1000);
 
   usbCarrier = 11994999l;
   menuSetupCarrier(1);
 
-  if (usbCarrier == 11994999l){
-    printLine2("Setup Aborted");
+  if (usbCarrier == 11994999L){
+    printLine2( (char *) "Setup Aborted");
     return;
   }
 
   
-  printLine2("#3:Test 3.5MHz");
+  printLine2( (char *) "#3:Test 3.5MHz");
   isUSB = false;
-  setFrequency(3500000l);
+  setFrequency(3500000L);
   updateDisplay();
 
   while (!btnDown()){
@@ -46,9 +54,9 @@ void factory_alignment(){
   }
 
   btnWaitForClick();
-  printLine2("#4:Test 7MHz");
+  printLine2( (char *) "#4:Test 7MHz");
 
-  setFrequency(7150000l);
+  setFrequency(7150000L);
   updateDisplay();
   while (!btnDown()){
     checkPTT();
@@ -56,10 +64,10 @@ void factory_alignment(){
   }
 
   btnWaitForClick();
-  printLine2("#5:Test 14MHz");
+  printLine2( (char *) "#5:Test 14MHz");
 
   isUSB = true;
-  setFrequency(14000000l);
+  setFrequency(14000000L);
   updateDisplay();
   while (!btnDown()){
     checkPTT();
@@ -67,20 +75,20 @@ void factory_alignment(){
   }
 
   btnWaitForClick();
-  printLine2("#6:Test 28MHz");
+  printLine2( (char *) "#6:Test 28MHz");
 
-  setFrequency(28000000l);
+  setFrequency(28000000L);
   updateDisplay();
   while (!btnDown()){
     checkPTT();
     delay(100);
   }
 
-  printLine2("Alignment done");
+  printLine2( (char *) "Alignment done");
   delay(1000);
 
   isUSB = false;
-  setFrequency(7150000l);
+  setFrequency(7150000L);
   updateDisplay();  
   
 }

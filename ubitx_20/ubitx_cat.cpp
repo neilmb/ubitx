@@ -9,6 +9,15 @@
  * it gives time out error with WSJTX 1.8.0
  */
 
+#ifndef PROTOFLAG
+  #include "Prototypes.h"
+#endif
+
+extern boolean txCAT;
+extern char b[30], c[30], inTx, isUSB;
+extern int count;
+extern unsigned long frequency;
+
 // The next 4 functions are needed to implement the CAT protocol, which
 // uses 4-bit BCD formatting.
 //
@@ -121,7 +130,7 @@ void processCATCommand(byte* cmd) {
     else
       response[4] = 0x00; //LSB
     Serial.write(response,5);
-    printLine2("cat:getfreq");
+    printLine2( (char *) "cat:getfreq");
   }
   else if (cmd[4] == 0x07){ // set mode
     if (cmd[0] == 0x00 || cmd[0] == 0x03)
@@ -141,7 +150,7 @@ void processCATCommand(byte* cmd) {
     }
     else
       response[0] = 0xf0;
-    printLine2("tx > rx");
+    printLine2( (char *) "tx > rx");
     Serial.write(response,1);
   }
   else if (cmd[4] == 0x08) { // PTT On
@@ -154,7 +163,7 @@ void processCATCommand(byte* cmd) {
       response[0] = 0xf0;
     }
     Serial.write(response,1);
-    printLine2("rx > tx");
+    printLine2( (char *) "rx > tx");
   }
   // Read TX keyed state
   else if (cmd[4] == 0x10) {
@@ -164,18 +173,17 @@ void processCATCommand(byte* cmd) {
       response[0] = 0xf0;
     }
     Serial.write(response,1);
-    printLine2("cat;0x10");
+    printLine2( (char *) "cat;0x10");
   }
   // PTT Off
   else if (cmd[4] == 0x88) {
-    byte resBuf[0];
     if (inTx) {
       response[0] = 0;
     } else {
       response[0] = 0xf0;
     }
     Serial.write(response,1);
-    printLine2("cat;0x88");
+    printLine2( (char *) "cat;0x88");
     //keyed = false;
     //digitalWrite(13,LOW);
   }
@@ -183,7 +191,7 @@ void processCATCommand(byte* cmd) {
   else if (cmd[4] == 0xe7) {
     response[0] = 0x09;
     Serial.write(response,1);
-    printLine2("cat;0xe7");
+    printLine2( (char *) "cat;0xe7");
   }
   else if (cmd[4] == 0xf5){
 
@@ -195,19 +203,18 @@ void processCATCommand(byte* cmd) {
       response[0] = response[0] | 0xf0;
     }
     Serial.write(response,1);
-    printLine2("cat;0xf7");
+    printLine2( (char *) "cat;0xf7");
   }
   else {
     //somehow, get this to print the four bytes
     ultoa(*((unsigned long *)cmd), c, 16);
     itoa(cmd[4], b, 16);
-    strcat(b, ":");
+    strcat(b,  (char *) ":");
     strcat(b, c);
     printLine2(b);
     response[0] = 0x00;
     Serial.write(response[0]);
   }
-
 }
 
 
