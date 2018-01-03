@@ -7,4 +7,4 @@ install:
 
 script:
   - platformio ci --project-conf=platformio.ini ubitx_20
-	- "! grep '\s$' -- ubitx_20/*.ino"
+  - "! grep '\s$' -- ubitx_20/*.ino"
