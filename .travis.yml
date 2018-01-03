@@ -1,9 +1,10 @@
 language: python
 python:
-    - "2.7"
+  - "2.7"
 
 install:
-    - pip install -U platformio
+  - pip install -U platformio
 
 script:
-    - platformio ci --project-conf=platformio.ini ubitx_20
+  - platformio ci --project-conf=platformio.ini ubitx_20
+	- "! grep '\s$' -- ubitx_20/*.ino"
