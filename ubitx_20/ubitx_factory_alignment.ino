@@ -1,6 +1,6 @@
 
 /**
- * This procedure is only for those who have a signal generator/transceiver tuned to exactly 7.150 and a dummy load 
+ * This procedure is only for those who have a signal generator/transceiver tuned to exactly 7.150 and a dummy load
  */
 
 void btnWaitForClick(){
@@ -12,7 +12,7 @@ void btnWaitForClick(){
 }
 
 void factory_alignment(){
-        
+
   factoryCalibration(1);
 
   if (calibration == 0){
@@ -34,7 +34,7 @@ void factory_alignment(){
     return;
   }
 
-  
+
   printLine2("#3:Test 3.5MHz");
   isUSB = false;
   setFrequency(3500000l);
@@ -81,7 +81,7 @@ void factory_alignment(){
 
   isUSB = false;
   setFrequency(7150000l);
-  updateDisplay();  
-  
+  updateDisplay();
+
 }
 

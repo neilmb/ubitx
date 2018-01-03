@@ -476,7 +476,7 @@ void menuSetupCwTone(int btn){
     delay(1000);
     tone(CW_TONE, sideTone);
 
-    //disable all clock 1 and clock 2 
+    //disable all clock 1 and clock 2
     while (digitalRead(PTT) == HIGH && !btnDown())
     {
       knob = enc_read();
