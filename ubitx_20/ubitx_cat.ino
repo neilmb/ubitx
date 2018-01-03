@@ -168,7 +168,6 @@ void processCATCommand(byte* cmd) {
   }
   // PTT Off
   else if (cmd[4] == 0x88) {
-    byte resBuf[0];
     if (inTx) {
       response[0] = 0;
     } else {
