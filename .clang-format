@@ -1,3 +1,5 @@
 ---
-Language:        Cpp
-BasedOnStyle:  Google
+Language: Cpp
+BasedOnStyle: Google
+UseTab: Never
+TabWidth: 2

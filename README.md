@@ -23,4 +23,4 @@ Copyright (C) 2017,  Ashhar Farhan
 To make community contributions more manageable, we use automated
 testing to ensure that the code is consistently formatted. To format
 the code automatically in accordance with the style guidelines, install
-the program `clang-format`
+the program `clang-format` and run `clang-format -i ubitx_20/*`.
